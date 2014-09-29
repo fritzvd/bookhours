@@ -1,0 +1,24 @@
+{
+  "name": "bookhours",
+  "version": "0.0.0",
+  "description": "i don't want to enter shit.. ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node_modules/.bin/phantomjs index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "-"
+  },
+  "keywords": [
+    "book",
+    "hours",
+    "for",
+    "me"
+  ],
+  "author": "fritzvd",
+  "license": "WTFPL",
+  "dependencies": {
+    "phantomjs": "~1.9.10"
+  }
+}
