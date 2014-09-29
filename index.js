@@ -50,9 +50,11 @@ var results = function (result) {
     setTimeout(function () {    
       var result = page.evaluate(crawler);
       results(result);
-    }, 4000)
+    }, 4000);
   } else if (result === 'hours') {
-    phantom.exit();
+    setTimeout(function () {
+      phantom.exit();
+    }, 4000);
   }
 };
 
