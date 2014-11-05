@@ -1,6 +1,14 @@
 bookhours
 =========
 
+Update
+------
+Something changed for the project. So have to rebook my hours:
+
+    npm install
+    ./node_modules/.bin/phantomjs adjustments.js
+
+
 book my hours for me.
 
 To run
