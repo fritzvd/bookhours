@@ -4,7 +4,7 @@
   "description": "i don't want to enter shit.. ",
   "main": "index.js",
   "scripts": {
-    "start": "node_modules/.bin/phantomjs index.js"
+    "start": "node_modules/.bin/slimerjs index.js --ignore-ssl-errors=true"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,6 @@
   "author": "fritzvd",
   "license": "WTFPL",
   "dependencies": {
-    "phantomjs": "~1.9.10"
+    "slimerjs": "^0.9.6"
   }
 }
