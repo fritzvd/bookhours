@@ -36,7 +36,7 @@ var crawler = function (cred) {
     
   } else if (location.host === 'trs.lizard.net' ||
              location.host === 'trs.nelen-schuurmans.nl') {
-    console.log(cred.projectId)
+    console.log(cred.projectId);
     var nxt = document.getElementById(cred.projectId);
     nxt.value = cred.hours;
     $('input.btn').click();
@@ -55,11 +55,11 @@ var results = function (result) {
     }, 4000);
   } else if ('hours'){
     setTimeout(function () {
-      //phantom.exit();
+      phantom.exit();
     }, 4000);
   } else {
     console.log('something went wrong');
-    //phantom.exit();
+    phantom.exit();
   }
 };
 
@@ -80,17 +80,17 @@ page.onError = function(msg, trace) {
 console.log(page.settings.userAgent);
 page.open(myUrl, function (status) {
   console.log(user, status, myUrl);
-  //if (status === 'success') {
+  if (status === 'success') {
     var result = page.evaluate(crawler, {
       user: user, 
       pass: pass,
       projectId: projectId
     });
     results(result);
-  //} else {
+  } else {
     //throw new Error(status)
     console.log('broken\n because: ', status);
-    //phantom.exit();
-  //}
+    phantom.exit();
+  }
 });
 
