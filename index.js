@@ -1,20 +1,17 @@
 // How much do you work.
-var HOURS = 32; 
-
-
 var page = require('webpage').create();
 var fs = require('fs');
 
-var user, pass, myUrl, projectId;
+var user, pass, myUrl, projects;
 
 var getCredentials = function () {
-  data = fs.read('sso.conf');
-
-  user = data.split('\n')[0].split('=')[1];
-  pass = data.split('\n')[1].split('=')[1];
-  HOURS = data.split('\n')[2].split('=')[1];
+  var data = fs.read('sso.json');
+  data = JSON.parse(data);
+  
+  user = data.username;
+  pass = data.password;
+  projects = data.projects;
   myUrl = 'https://trs.lizard.net/'; //#' + HOURS;
-  projectId = data.split('\n')[3].split('=')[1];
 };
 
 getCredentials();
@@ -36,9 +33,11 @@ var crawler = function (cred) {
     
   } else if (location.host === 'trs.lizard.net' ||
              location.host === 'trs.nelen-schuurmans.nl') {
-    console.log(cred.projectId);
-    var nxt = document.getElementById(cred.projectId);
-    nxt.value = cred.hours;
+    Object.keys(cred.projects).forEach(function (projectId) {
+      console.log(projectId);
+      var nxt = document.getElementById(projectId);
+      nxt.value = cred.projects[projectId];
+    });
     $('input.btn').click();
     return 'hours';
   } else {
@@ -50,7 +49,7 @@ var results = function (result) {
   console.log(result);
   if (result === 'logging in') {
     setTimeout(function () {    
-      var result = page.evaluate(crawler, {hours: HOURS, projectId: projectId});
+      var result = page.evaluate(crawler, {projects: projects});
       results(result);
     }, 4000);
   } else if ('hours'){
@@ -84,7 +83,7 @@ page.open(myUrl, function (status) {
     var result = page.evaluate(crawler, {
       user: user, 
       pass: pass,
-      projectId: projectId
+      projects: projects
     });
     results(result);
   } else {
